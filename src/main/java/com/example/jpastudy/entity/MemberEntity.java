@@ -1,6 +1,7 @@
 package com.example.jpastudy.entity;
 
 
+import com.example.jpastudy.entity.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,11 +11,8 @@ import javax.persistence.*;
 @Table(name="member")
 @Getter
 @Setter
-public class Member {
-
-    @Id @GeneratedValue
-    @Column(name="member_id")
-    private Long id;
+@AttributeOverride(name = "id",column = @Column(name="member_id"))
+public class MemberEntity extends BaseEntity {
     private String name;
     private String city;
     private String street;
