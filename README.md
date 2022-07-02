@@ -5,7 +5,7 @@
 자바 ORM 표준 JPA 프로그래밍 교재의 실전 예제 
 
 
-개발환경 셋팅
+1. 개발환경 셋팅
 
     1-1 JDK 1.8
     1-2 springframework.boot 2.6.7
