@@ -8,6 +8,9 @@
 1. 개발환경 셋팅
 
     1-1 JDK 1.8
+    
     1-2 springframework.boot 2.6.7
+    
     1-3 spring-boot-starter-data-jpa
+    
     1-4 com.h2database:h2
