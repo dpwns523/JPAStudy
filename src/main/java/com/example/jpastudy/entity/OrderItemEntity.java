@@ -13,9 +13,30 @@ import javax.persistence.*;
 @AttributeOverride(name = "id",column = @Column(name="order_item_id"))
 public class OrderItemEntity extends BaseEntity {
 
-    private Long itemId;     // 객체 지향적 문제 + 외래 키를 그대로 가져옴 -> 객체 참조가 아니기 때문에 객체 그래프 탐색을 할 수 없는 문제 발생
-    private Long orderId;     // 객체 지향적 문제 + 외래 키를 그대로 가져옴 -> 객체 참조가 아니기 때문에 객체 그래프 탐색을 할 수 없는 문제 발생
-
     private Integer orderPrice;
     private Integer count;
+
+    @ManyToOne
+    @JoinColumn(name = "ITEM_ID")
+    private ItemEntity item;
+
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID")
+    private OrdersEntity ordersEntity;
+
+    //==생성 메서드==//
+    public static OrderItemEntity createOrderItem(ItemEntity itemEntity, int orderPrice, int count) {
+        OrderItemEntity orderItemEntity = new OrderItemEntity();
+        orderItemEntity.setItem(itemEntity);
+        orderItemEntity.setOrderPrice(orderPrice);
+        orderItemEntity.setCount(count);
+
+        itemEntity.removeStock(count);
+        return orderItemEntity;
+    }
+
+    //==비즈니스 로직==//
+    public void cancel() {
+        getItem().addStock(count);
+    }
 }

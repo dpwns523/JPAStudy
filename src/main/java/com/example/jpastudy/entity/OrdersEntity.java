@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="orders")
@@ -16,13 +18,43 @@ import java.sql.Timestamp;
 @AttributeOverride(name = "id",column = @Column(name="order_id"))
 public class OrdersEntity extends BaseEntity {
 
-    @Column(name="member_id")   // 생략가능
-    private Long memberId;     // 객체 지향적 문제 + 외래 키를 그대로 가져옴 -> 객체 참조가 아니기 때문에 객체 그래프 탐색을 할 수 없는 문제 발생
-
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp orderDate;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @ManyToOne
+    @JoinColumn(name="MEMBER_ID")
+    private MemberEntity memberEntity;
+
+    @OneToMany(mappedBy = "ordersEntity")
+    private List<OrderItemEntity> orderItems = new ArrayList<OrderItemEntity>();
+
+    //==연관관계 메소드==//
+    public void setMemberEntity(MemberEntity memberEntity){
+        // 기존관계 제거
+        if(this.memberEntity != null){
+            this.memberEntity.getOrders().remove(this);
+        }
+        this.memberEntity = memberEntity;
+        memberEntity.getOrders().add(this);
+    }
+
+    public void addOrderItemEntity(OrderItemEntity orderItemEntity){
+        orderItems.add(orderItemEntity);
+        orderItemEntity.setOrdersEntity(this);
+    }
+    //==비즈니스 로직==//
+    /**
+     * 주문 취소
+     */
+    public void cancel() {
+        this.setStatus(OrderStatus.CANCEL);
+        for (OrderItemEntity orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
+
 }
