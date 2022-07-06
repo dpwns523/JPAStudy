@@ -1,6 +1,6 @@
 package com.example.jpastudy.service;
 
-import com.example.jpastudy.domain.Orders;
+
 import com.example.jpastudy.entity.OrdersEntity;
 
 public interface OrderService {

@@ -1,6 +1,5 @@
 package com.example.jpastudy.serviceImpl;
 
-import com.example.jpastudy.domain.Member;
 import com.example.jpastudy.entity.MemberEntity;
 import com.example.jpastudy.service.MemberService;
 import lombok.RequiredArgsConstructor;

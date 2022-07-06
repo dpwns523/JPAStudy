@@ -1,7 +1,6 @@
 package com.example.jpastudy;
 
-import com.example.jpastudy.domain.Item;
-import com.example.jpastudy.domain.Member;
+
 import com.example.jpastudy.entity.ItemEntity;
 import com.example.jpastudy.entity.MemberEntity;
 import com.example.jpastudy.entity.OrderItemEntity;
@@ -14,12 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,11 +30,8 @@ class JpastudyApplicationTests {
     @Test
     @Transactional
     void testMember() {
-        MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setCity("Incheon");
-        memberEntity.setName("dpwns");
-        memberEntity.setStreet("Bupeon");
-        memberEntity.setZipcode("ccc");
+        MemberEntity memberEntity = MemberEntity.builder()
+                .name("dpwns").city("Incheon").street("Bupeon").zipcode("ccc").build();
 
         Long memberId = memberService.join(memberEntity);
         MemberEntity memberEntity2 = memberService.findById(memberId);
@@ -64,11 +57,8 @@ class JpastudyApplicationTests {
     @Test
     @Transactional
     void testOrder(){
-        MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setCity("Incheon");
-        memberEntity.setName("dpwns");
-        memberEntity.setStreet("Bupeon");
-        memberEntity.setZipcode("ccc");
+        MemberEntity memberEntity = MemberEntity.builder()
+                .name("dpwns").city("Incheon").street("Bupeon").zipcode("ccc").build();
 
         Long memberId = memberService.join(memberEntity);
         MemberEntity memberEntity2 = memberService.findById(memberId);
