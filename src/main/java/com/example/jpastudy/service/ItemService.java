@@ -2,7 +2,7 @@ package com.example.jpastudy.service;
 
 
 
-import com.example.jpastudy.entity.ItemEntity;
+import com.example.jpastudy.entity.item.ItemEntity;
 
 public interface ItemService {
     Long registItem(ItemEntity itemEntity);

@@ -1,7 +1,7 @@
 package com.example.jpastudy.serviceImpl;
 
 
-import com.example.jpastudy.entity.ItemEntity;
+import com.example.jpastudy.entity.item.ItemEntity;
 import com.example.jpastudy.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

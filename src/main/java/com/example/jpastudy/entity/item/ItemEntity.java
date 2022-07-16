@@ -1,5 +1,6 @@
-package com.example.jpastudy.entity;
+package com.example.jpastudy.entity.item;
 
+import com.example.jpastudy.entity.CategoryEntity;
 import com.example.jpastudy.entity.base.BaseEntity;
 import com.example.jpastudy.exception.NotEnoughStockException;
 import lombok.Getter;
@@ -14,7 +15,9 @@ import java.util.List;
 @Getter
 @Setter
 @AttributeOverride(name = "id",column = @Column(name="item_id"))
-public class ItemEntity extends BaseEntity {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="DTYPE")
+public abstract class ItemEntity extends BaseEntity {
 
     private String name;
     private Integer price;

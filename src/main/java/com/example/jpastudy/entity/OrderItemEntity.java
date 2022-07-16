@@ -1,6 +1,7 @@
 package com.example.jpastudy.entity;
 
 import com.example.jpastudy.entity.base.BaseEntity;
+import com.example.jpastudy.entity.item.ItemEntity;
 import lombok.Getter;
 import lombok.Setter;
 
