@@ -30,7 +30,5 @@ public class MemberEntity extends BaseEntity {
         this.zipcode = zipcode;
     }
 
-    public MemberEntity() {
-
-    }
+    public MemberEntity() {}
 }

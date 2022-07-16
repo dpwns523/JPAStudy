@@ -32,6 +32,10 @@ public class OrdersEntity extends BaseEntity {
     @OneToMany(mappedBy = "ordersEntity")
     private List<OrderItemEntity> orderItems = new ArrayList<OrderItemEntity>();
 
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
+    private DeliveryEntity deliveryEntity;
+
     //==연관관계 메소드==//
     public void setMemberEntity(MemberEntity memberEntity){
         // 기존관계 제거
@@ -45,6 +49,11 @@ public class OrdersEntity extends BaseEntity {
     public void addOrderItemEntity(OrderItemEntity orderItemEntity){
         orderItems.add(orderItemEntity);
         orderItemEntity.setOrdersEntity(this);
+    }
+
+    public void setDeliveryEntity(DeliveryEntity deliveryEntity){
+        this.deliveryEntity = deliveryEntity;
+        deliveryEntity.setOrdersEntity(this);
     }
     //==비즈니스 로직==//
     /**
