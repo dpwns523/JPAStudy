@@ -25,14 +25,14 @@ public class OrdersEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="MEMBER_ID")
     private MemberEntity memberEntity;
 
-    @OneToMany(mappedBy = "ordersEntity")
+    @OneToMany(mappedBy = "ordersEntity", cascade = CascadeType.ALL)
     private List<OrderItemEntity> orderItems = new ArrayList<OrderItemEntity>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
     private DeliveryEntity deliveryEntity;
 

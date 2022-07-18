@@ -17,11 +17,11 @@ public class OrderItemEntity extends BaseEntity {
     private Integer orderPrice;
     private Integer count;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID")
     private ItemEntity item;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
     private OrdersEntity ordersEntity;
 
