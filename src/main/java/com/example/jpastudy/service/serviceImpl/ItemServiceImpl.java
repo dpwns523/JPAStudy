@@ -1,7 +1,8 @@
-package com.example.jpastudy.serviceImpl;
+package com.example.jpastudy.service.serviceImpl;
 
 
 import com.example.jpastudy.entity.item.ItemEntity;
+import com.example.jpastudy.repository.ItemRepository;
 import com.example.jpastudy.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,17 +14,16 @@ import javax.persistence.PersistenceContext;
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-    @PersistenceContext
-    EntityManager em;
+    private final ItemRepository itemRepository;
 
     @Override
     public Long registItem(ItemEntity itemEntity) {
-        em.persist(itemEntity);
+        itemRepository.save(itemEntity);
         return itemEntity.getId();
     }
 
     @Override
     public ItemEntity findById(Long id) {
-        return em.find(ItemEntity.class, id);
+        return itemRepository.findOne(id);
     }
 }

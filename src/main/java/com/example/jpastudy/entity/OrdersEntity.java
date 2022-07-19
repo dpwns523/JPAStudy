@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,18 @@ public class OrdersEntity extends BaseEntity {
     public void setDeliveryEntity(DeliveryEntity deliveryEntity){
         this.deliveryEntity = deliveryEntity;
         deliveryEntity.setOrdersEntity(this);
+    }
+    //==생성 메서드==//
+    public static OrdersEntity createOrder(MemberEntity member, DeliveryEntity delivery, OrderItemEntity... orderItems) {
+        OrdersEntity order = new OrdersEntity();
+        order.setMemberEntity(member);
+        order.setDeliveryEntity(delivery);
+        for (OrderItemEntity orderItem : orderItems) {
+            order.addOrderItemEntity(orderItem);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        return order;
     }
     //==비즈니스 로직==//
     /**

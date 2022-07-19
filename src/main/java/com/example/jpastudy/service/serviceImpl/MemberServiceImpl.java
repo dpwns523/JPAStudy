@@ -1,6 +1,7 @@
-package com.example.jpastudy.serviceImpl;
+package com.example.jpastudy.service.serviceImpl;
 
 import com.example.jpastudy.entity.MemberEntity;
+import com.example.jpastudy.repository.MemberRepository;
 import com.example.jpastudy.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,18 +14,17 @@ import javax.persistence.PersistenceContext;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    @PersistenceContext
-    EntityManager em;
+    private final MemberRepository memberRepository;
 
     @Override
     @Transactional
     public Long join(MemberEntity memberEntity) {
-        em.persist(memberEntity);
+        memberRepository.save(memberEntity);
         return memberEntity.getId();
     }
 
     @Override
     public MemberEntity findById(Long id) {
-        return em.find(MemberEntity.class, id);
+        return memberRepository.findOne(id);
     }
 }
