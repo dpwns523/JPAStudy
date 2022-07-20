@@ -1,6 +1,7 @@
 package com.example.jpastudy.controller;
 
 import com.example.jpastudy.dto.Member;
+import com.example.jpastudy.entity.Address;
 import com.example.jpastudy.entity.MemberEntity;
 import com.example.jpastudy.service.MemberService;
 
@@ -19,11 +20,12 @@ public class MemberController {
 
     @PostMapping("/api/members")
     public Member.JoinMemberResponse saveMemberV1(@RequestBody @Valid Member.JoinMemberRequest joinMemberRequest) {
+
+        Address address = new Address(joinMemberRequest.getCity(), joinMemberRequest.getStreet(), joinMemberRequest.getZipcode());
+
         MemberEntity memberEntity = MemberEntity.builder()
                                     .name(joinMemberRequest.getName())
-                                    .city(joinMemberRequest.getCity())
-                                    .street(joinMemberRequest.getStreet())
-                                    .zipcode(joinMemberRequest.getZipcode())
+                                    .address(address)
                                     .build();
 
         Long id = memberService.join(memberEntity);

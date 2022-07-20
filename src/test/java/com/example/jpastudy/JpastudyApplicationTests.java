@@ -27,18 +27,18 @@ class JpastudyApplicationTests {
     @Autowired
     private ItemService itemService;
 
-    @Test
-    @Transactional
-    void testMember() {
-        MemberEntity memberEntity = MemberEntity.builder()
-                .name("dpwns").city("Incheon").street("Bupeon").zipcode("ccc").build();
-
-        Long memberId = memberService.join(memberEntity);
-        MemberEntity memberEntity2 = memberService.findById(memberId);
-
-        Assertions.assertThat(memberId).isEqualTo(memberEntity.getId());
-        Assertions.assertThat(memberEntity.getName()).isEqualTo(memberEntity2.getName());
-    }
+//    @Test
+//    @Transactional
+//    void testMember() {
+//        MemberEntity memberEntity = MemberEntity.builder()
+//                .name("dpwns").city("Incheon").street("Bupeon").zipcode("ccc").build();
+//
+//        Long memberId = memberService.join(memberEntity);
+//        MemberEntity memberEntity2 = memberService.findById(memberId);
+//
+//        Assertions.assertThat(memberId).isEqualTo(memberEntity.getId());
+//        Assertions.assertThat(memberEntity.getName()).isEqualTo(memberEntity2.getName());
+//    }
 
 //    @Test
 //    @Transactional

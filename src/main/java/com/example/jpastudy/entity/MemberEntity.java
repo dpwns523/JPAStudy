@@ -15,19 +15,17 @@ import java.util.List;
 @AttributeOverride(name = "id",column = @Column(name="member_id"))
 public class MemberEntity extends BaseEntity {
     private String name;
-    private String city;
-    private String street;
-    private String zipcode;
+
+    @Embedded
+    private Address address;
 
     @OneToMany(mappedBy = "memberEntity")
     private List<OrdersEntity> orders = new ArrayList<OrdersEntity>();
 
     @Builder
-    public MemberEntity(String name, String city, String street, String zipcode) {
+    public MemberEntity(String name, Address address) {
         this.name = name;
-        this.city = city;
-        this.street = street;
-        this.zipcode = zipcode;
+        this.address = address;
     }
 
     public MemberEntity() {}

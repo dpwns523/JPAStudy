@@ -31,9 +31,7 @@ public class OrdersServiceImpl implements OrderService {
 
         //배송정보 생성
         DeliveryEntity deliveryEntity = new DeliveryEntity();
-        deliveryEntity.setCity(memberEntity.getCity());
-        deliveryEntity.setStreet(memberEntity.getStreet());
-        deliveryEntity.setZipcode(memberEntity.getZipcode());
+        deliveryEntity.setAddress(memberEntity.getAddress());
         deliveryEntity.setStatus(DeliveryStatus.READY);
 
         //주문상품 생성
