@@ -1,8 +1,8 @@
 package com.example.jpastudy.service;
 
-import com.example.jpastudy.entity.MemberEntity;
+import com.example.jpastudy.entity.Member;
 
 public interface MemberService {
-    Long join(MemberEntity memberEntity);
-    MemberEntity findById(Long id);
+    Long join(Member member);
+    Member findById(Long id);
 }

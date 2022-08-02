@@ -1,6 +1,6 @@
 package com.example.jpastudy.entity;
 
-import com.example.jpastudy.entity.base.BaseEntity;
+import com.example.jpastudy.entity.base.Base;
 import com.example.jpastudy.enums.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @AttributeOverride(name = "id",column = @Column(name="order_id"))
-public class OrdersEntity extends BaseEntity {
+public class Orders extends Base {
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -28,40 +28,40 @@ public class OrdersEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="MEMBER_ID")
-    private MemberEntity memberEntity;
+    private Member member;
 
-    @OneToMany(mappedBy = "ordersEntity", cascade = CascadeType.ALL)
-    private List<OrderItemEntity> orderItems = new ArrayList<OrderItemEntity>();
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
-    private DeliveryEntity deliveryEntity;
+    private Delivery delivery;
 
     //==연관관계 메소드==//
-    public void setMemberEntity(MemberEntity memberEntity){
+    public void setMember(Member member){
         // 기존관계 제거
-        if(this.memberEntity != null){
-            this.memberEntity.getOrders().remove(this);
+        if(this.member != null){
+            this.member.getOrders().remove(this);
         }
-        this.memberEntity = memberEntity;
-        memberEntity.getOrders().add(this);
+        this.member = member;
+        member.getOrders().add(this);
     }
 
-    public void addOrderItemEntity(OrderItemEntity orderItemEntity){
-        orderItems.add(orderItemEntity);
-        orderItemEntity.setOrdersEntity(this);
+    public void addOrderItemEntity(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrders(this);
     }
 
-    public void setDeliveryEntity(DeliveryEntity deliveryEntity){
-        this.deliveryEntity = deliveryEntity;
-        deliveryEntity.setOrdersEntity(this);
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery;
+        delivery.setOrders(this);
     }
     //==생성 메서드==//
-    public static OrdersEntity createOrder(MemberEntity member, DeliveryEntity delivery, OrderItemEntity... orderItems) {
-        OrdersEntity order = new OrdersEntity();
-        order.setMemberEntity(member);
-        order.setDeliveryEntity(delivery);
-        for (OrderItemEntity orderItem : orderItems) {
+    public static Orders createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Orders order = new Orders();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for (OrderItem orderItem : orderItems) {
             order.addOrderItemEntity(orderItem);
         }
         order.setStatus(OrderStatus.ORDER);
@@ -74,7 +74,7 @@ public class OrdersEntity extends BaseEntity {
      */
     public void cancel() {
         this.setStatus(OrderStatus.CANCEL);
-        for (OrderItemEntity orderItem : orderItems) {
+        for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }
     }

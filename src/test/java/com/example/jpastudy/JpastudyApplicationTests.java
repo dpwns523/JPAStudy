@@ -1,31 +1,18 @@
 package com.example.jpastudy;
 
 
-import com.example.jpastudy.entity.item.ItemEntity;
-import com.example.jpastudy.entity.MemberEntity;
-import com.example.jpastudy.entity.OrderItemEntity;
-import com.example.jpastudy.entity.OrdersEntity;
-import com.example.jpastudy.enums.OrderStatus;
-import com.example.jpastudy.service.ItemService;
-import com.example.jpastudy.service.MemberService;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
 class JpastudyApplicationTests {
-
-    @Autowired
-    private MemberService memberService;
-
-    @Autowired
-    private ItemService itemService;
+//
+//    @Autowired
+//    private MemberService memberService;
+//
+//    @Autowired
+//    private ItemService itemService;
 
 //    @Test
 //    @Transactional

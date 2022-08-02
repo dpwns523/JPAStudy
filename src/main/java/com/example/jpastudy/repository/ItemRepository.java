@@ -1,6 +1,6 @@
 package com.example.jpastudy.repository;
 
-import com.example.jpastudy.entity.item.ItemEntity;
+import com.example.jpastudy.entity.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
@@ -12,16 +12,16 @@ public class ItemRepository {
 
     private final EntityManager em;
 
-    public void save(ItemEntity itemEntity) {
-        if (itemEntity.getId() == null) {
-            em.persist(itemEntity);
+    public void save(Item item) {
+        if (item.getId() == null) {
+            em.persist(item);
         } else {
-            em.merge(itemEntity);
+            em.merge(item);
         }
     }
 
-    public ItemEntity findOne(Long id) {
-        return em.find(ItemEntity.class, id);
+    public Item findOne(Long id) {
+        return em.find(Item.class, id);
     }
 
 

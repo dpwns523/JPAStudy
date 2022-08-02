@@ -2,7 +2,16 @@ plugins {
     id 'org.springframework.boot' version '2.6.7'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'war'
 }
+apply plugin : 'war'
+bootWar{
+    archiveBaseName = 'test'
+    archiveFileName = 'test.war'
+    archiveVersion = "0.0.0"
+}
+bootWar.enabled = false
+war.enabled = true
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -24,6 +33,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'junit:junit:4.13.1'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -31,10 +42,13 @@ dependencies {
     // QueryDSL
     implementation 'com.querydsl:querydsl-jpa'
 
-
+    runtimeOnly 'mysql:mysql-connector-java'
     runtimeOnly "com.h2database:h2"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
 }
 
 tasks.named('test') {

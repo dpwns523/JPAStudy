@@ -1,7 +1,7 @@
 package com.example.jpastudy.entity.item;
 
-import com.example.jpastudy.entity.CategoryEntity;
-import com.example.jpastudy.entity.base.BaseEntity;
+import com.example.jpastudy.entity.Category;
+import com.example.jpastudy.entity.base.Base;
 import com.example.jpastudy.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,14 +17,14 @@ import java.util.List;
 @AttributeOverride(name = "id",column = @Column(name="item_id"))
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="DTYPE")
-public abstract class ItemEntity extends BaseEntity {
+public abstract class Item extends Base {
 
     private String name;
     private Integer price;
     private Integer stockQuantity;
 
-    @ManyToMany(mappedBy = "itemEntities")
-    private List<CategoryEntity> categoryEntities = new ArrayList<>();
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categoryEntities = new ArrayList<>();
 
     //==비즈니스 로직==//
     /**

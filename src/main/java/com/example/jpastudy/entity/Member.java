@@ -1,7 +1,7 @@
 package com.example.jpastudy.entity;
 
 
-import com.example.jpastudy.entity.base.BaseEntity;
+import com.example.jpastudy.entity.base.Base;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,20 +13,20 @@ import java.util.List;
 @Table(name="member")
 @Getter
 @AttributeOverride(name = "id",column = @Column(name="member_id"))
-public class MemberEntity extends BaseEntity {
+public class Member extends Base {
     private String name;
 
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "memberEntity")
-    private List<OrdersEntity> orders = new ArrayList<OrdersEntity>();
+    @OneToMany(mappedBy = "member")
+    private List<Orders> orders = new ArrayList<Orders>();
 
     @Builder
-    public MemberEntity(String name, Address address) {
+    public Member(String name, Address address) {
         this.name = name;
         this.address = address;
     }
 
-    public MemberEntity() {}
+    public Member() {}
 }

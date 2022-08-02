@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class BaseEntity {
+public abstract class Base {
     @Id @GeneratedValue
     protected Long id;
 
@@ -24,7 +24,7 @@ public abstract class BaseEntity {
     @UpdateTimestamp
     protected Timestamp updatedAt;
 
-    public BaseEntity() {
+    public Base() {
         this.isDeleted = false;
     }
 }

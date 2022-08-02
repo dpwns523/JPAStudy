@@ -1,6 +1,6 @@
 package com.example.jpastudy.entity;
 
-import com.example.jpastudy.entity.base.BaseEntity;
+import com.example.jpastudy.entity.base.Base;
 import com.example.jpastudy.enums.DeliveryStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,10 +12,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AttributeOverride(name = "id",column = @Column(name="delivery_id"))
-public class DeliveryEntity extends BaseEntity {
+public class Delivery extends Base {
 
-    @OneToOne(mappedBy= "deliveryEntity")
-    private OrdersEntity ordersEntity;
+    @OneToOne(mappedBy= "delivery")
+    private Orders orders;
 
     @Embedded
     private Address address;

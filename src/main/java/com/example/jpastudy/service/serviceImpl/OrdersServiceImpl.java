@@ -1,10 +1,10 @@
 package com.example.jpastudy.service.serviceImpl;
 
-import com.example.jpastudy.entity.DeliveryEntity;
-import com.example.jpastudy.entity.MemberEntity;
-import com.example.jpastudy.entity.OrderItemEntity;
-import com.example.jpastudy.entity.OrdersEntity;
-import com.example.jpastudy.entity.item.ItemEntity;
+import com.example.jpastudy.entity.Delivery;
+import com.example.jpastudy.entity.Member;
+import com.example.jpastudy.entity.OrderItem;
+import com.example.jpastudy.entity.Orders;
+import com.example.jpastudy.entity.item.Item;
 import com.example.jpastudy.enums.DeliveryStatus;
 import com.example.jpastudy.repository.ItemRepository;
 import com.example.jpastudy.repository.MemberRepository;
@@ -26,27 +26,27 @@ public class OrdersServiceImpl implements OrderService {
     @Override
     public Long Order(Long memberId, Long itemId, int count) {
         //엔티티 조회
-        MemberEntity memberEntity = memberRepository.findOne(memberId);
-        ItemEntity itemEntity = itemRepository.findOne(itemId);
+        Member member = memberRepository.findOne(memberId);
+        Item item = itemRepository.findOne(itemId);
 
         //배송정보 생성
-        DeliveryEntity deliveryEntity = new DeliveryEntity();
-        deliveryEntity.setAddress(memberEntity.getAddress());
-        deliveryEntity.setStatus(DeliveryStatus.READY);
+        Delivery delivery = new Delivery();
+        delivery.setAddress(member.getAddress());
+        delivery.setStatus(DeliveryStatus.READY);
 
         //주문상품 생성
-        OrderItemEntity orderItemEntity = OrderItemEntity.createOrderItem(itemEntity, itemEntity.getPrice(), count);
+        OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
 
         //주문 생성
-        OrdersEntity ordersEntity = OrdersEntity.createOrder(memberEntity, deliveryEntity, orderItemEntity);
+        Orders orders = Orders.createOrder(member, delivery, orderItem);
 
         //주문 저장
-        orderRepository.save(ordersEntity);
-        return ordersEntity.getId();
+        orderRepository.save(orders);
+        return orders.getId();
     }
 
     @Override
-    public OrdersEntity findById(Long id) {
+    public Orders findById(Long id) {
         return orderRepository.findOne(id);
     }
 
@@ -54,7 +54,7 @@ public class OrdersServiceImpl implements OrderService {
     @Override
     @Transactional
     public void cancel(Long orderId) {
-        OrdersEntity ordersEntity = findById(orderId);
-        ordersEntity.cancel();
+        Orders orders = findById(orderId);
+        orders.cancel();
     }
 }
